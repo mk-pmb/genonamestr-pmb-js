@@ -12,9 +12,9 @@ as a human-readable text.
 __Purpose:__
 I needed a method to store a melody in a text file, so my first idea was to
 just write the note names. In school I learned the German names, so in
-genonamestr the pinao key left of C is called [H, not B][hbhist].
+genonamestr the pinao key left of C is called [H, not B][genona].
 
-  [hbhist]: https://en.wikipedia.org/wiki/Musical_note#History_of_note_names
+  [genona]: https://en.wikipedia.org/wiki/Key_signature_names_and_translations
 
 __The name__ is just an abbreviation for "GErman NOte NAmes MElody STRing".
 
