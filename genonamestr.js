@@ -29,6 +29,7 @@ EX.dfltOpt = {
   octaveOffset: 0,
   noteDura: 0.2,
   noteGapFrac: 0.25,
+  volume: 1,
 };
 
 
@@ -54,15 +55,17 @@ EX.foundNote = function (name, sustain) {
   if (name !== ',') {
     note = EX.octaveNotes[name];
     if (note !== +note) { throw new Error('Unknown note: ' + name); }
-    note += (opt.octaveOffset * 12) + EX.midiGreatC;
-    note = { t: 'note', name: name, midiKey: note };
+    note = { t: 'note', name: name,
+      midiKey: note + (opt.octaveOffset * 12) + EX.midiGreatC,
+      vol: Math.max(Math.min(opt.volume, 1), 0),
+      };
   }
   note.dura = dura * opt.noteDura;
   note.gap = opt.noteDura * opt.noteGapFrac;
   return note;
 };
 
-EX.numTweakRgx = /^(<>|<|>|~[×…]?)([\+\-]?\d*(?:\.\d+|))/;
+EX.numTweakRgx = /^(<>|<|>|~[×…]?|\^×?)([\+\-]?\d*(?:\.\d+|))/;
 EX.foundNumTweak = function (tw, n) {
   EX.adjNumTweak[tw](this.opt, (+n || 0));
   return 'skip';
@@ -74,6 +77,8 @@ EX.adjNumTweak = {
   '~':  function (opt, n) { opt.noteDura = (n || EX.dfltOpt.noteDura); },
   '~×': function (opt, n) { opt.noteDura *= (n || 1); },
   '~…': function (opt, n) { opt.noteGapFrac = n; },
+  '^':  function (opt, n) { opt.volume = n; },
+  '^×': function (opt, n) { opt.volume *= n; },
 };
 
 

@@ -1,5 +1,5 @@
 { "name": "genonamestr-pmb",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Parser for the genonamestr music notation format. Allows to express a melody as a human-readable text.",
   "keywords": [
     "melody",
